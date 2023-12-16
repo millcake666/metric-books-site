@@ -12,7 +12,8 @@ class Uezd(Base):
     __tablename__ = 'uezd'
 
     u_code = Column(Integer(), primary_key=True)
-    u_name = Column(Text(), nullable=False, unique=True)
+    u_name = Column(Text(), nullable=False)
+    nas_punkt = relationship("NasPunkt")
 
 
 class NasPunkt(Base):
@@ -20,8 +21,8 @@ class NasPunkt(Base):
 
     u_code = Column(Integer(), ForeignKey('uezd.u_code'))
     np_code = Column(Integer(), primary_key=True)
-    np_name = Column(Text(), nullable=False, unique=True)
-    uezd = relationship('Uezd')
+    np_name = Column(Text(), nullable=False)
+    church = relationship("Church")
 
 
 class Church(Base):
@@ -29,8 +30,8 @@ class Church(Base):
 
     np_code = Column(Integer(), ForeignKey('nas_punkt.np_code'))
     c_code = Column(Integer(), primary_key=True)
-    c_name = Column(Text(), nullable=False, unique=True)
-    nas_punkt = relationship('NasPunkt')
+    c_name = Column(Text(), nullable=False)
+    data = relationship("Data")
 
 
 class Data(Base):
@@ -42,7 +43,6 @@ class Data(Base):
     met_fond = Column(Text(), nullable=False)
     met_delo = Column(Text(), nullable=False)
     met_page = Column(Text(), nullable=False)
-    church = relationship('Church')
 
 
 # Подключение к серверу PostgreSQL на localhost с помощью psycopg2 DBAPI
