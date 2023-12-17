@@ -1,6 +1,7 @@
-from database import Base
+from database.database import Base
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from sqlalchemy.orm import relationship
+from database.church import Church
 
 
 class NasPunkt(Base):
@@ -9,4 +10,4 @@ class NasPunkt(Base):
     u_code = Column(Integer(), ForeignKey('Uezd.u_code'))
     np_code = Column(Integer(), primary_key=True)
     np_name = Column(Text(), nullable=False)
-    church = relationship("Church")
+    church = relationship(Church)

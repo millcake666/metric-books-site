@@ -1,52 +1,11 @@
-from sqlalchemy import Column, Integer, Text, ForeignKey, create_engine
-from sqlalchemy.orm import declarative_base, relationship, Session
+from src.database.database import Base, get_session, engine
 import os
 import csv
+from src.database.church import Church
+from src.database.nasPunkt import NasPunkt
+from src.database.uezd import Uezd
+from src.database.data import Data
 
-# Создаем таблицы в базе
-Base = declarative_base()
-
-
-class Uezd(Base):
-    __tablename__ = 'uezd'
-
-    u_code = Column(Integer(), primary_key=True)
-    u_name = Column(Text(), nullable=False)
-    nas_punkt = relationship("NasPunkt")
-
-
-class NasPunkt(Base):
-    __tablename__ = 'nas_punkt'
-
-    u_code = Column(Integer(), ForeignKey('uezd.u_code'))
-    np_code = Column(Integer(), primary_key=True)
-    np_name = Column(Text(), nullable=False)
-    church = relationship("Church")
-
-
-class Church(Base):
-    __tablename__ = 'church'
-
-    np_code = Column(Integer(), ForeignKey('nas_punkt.np_code'))
-    c_code = Column(Integer(), primary_key=True)
-    c_name = Column(Text(), nullable=False)
-    data = relationship("Data")
-
-
-class Data(Base):
-    __tablename__ = 'data'
-
-    met_code = Column(Integer(), primary_key=True)
-    c_code = Column(Integer(), ForeignKey('church.c_code'))
-    met_year = Column(Text(), nullable=False)
-    met_fond = Column(Text(), nullable=False)
-    met_delo = Column(Text(), nullable=False)
-    met_page = Column(Text(), nullable=False)
-
-
-# Подключение к серверу PostgreSQL на localhost с помощью psycopg2 DBAPI
-engine = create_engine("postgresql+psycopg2://admin:admin1234@localhost/metric")
-conn = engine.connect()
 
 # Грузим таблицы в базу
 Base.metadata.create_all(engine)
@@ -54,7 +13,7 @@ Base.metadata.create_all(engine)
 # quit(0)
 
 # Добавляем значения их csv файлов в базу
-session = Session(bind=engine)
+session = get_session()
 
 csv_save_path = os.path.join(os.getcwd(), 'database', 'csv_export')
 
