@@ -1,4 +1,7 @@
-from sqlalchemy.orm import declarative_base
+from sqlalchemy import Column, Integer, Text, ForeignKey, create_engine
+from sqlalchemy.orm import declarative_base, relationship, Session
+import os
+import csv
 
 # Создаем таблицы в базе
 Base = declarative_base()
