@@ -1,8 +1,4 @@
-from sqlalchemy import create_engine, insert
-from sqlalchemy import Table, MetaData, Integer, Column, Text, ForeignKey
-from sqlalchemy.orm import relationship, declarative_base, Session, sessionmaker
-import csv
-import os
+from sqlalchemy.orm import declarative_base
 
 # Создаем таблицы в базе
 Base = declarative_base()
