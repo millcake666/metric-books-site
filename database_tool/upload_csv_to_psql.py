@@ -1,10 +1,10 @@
-from src.database.database import Base, get_session, engine
+from database.database import Base, get_session, engine
 import os
 import csv
-from src.database.church import Church
-from src.database.nasPunkt import NasPunkt
-from src.database.uezd import Uezd
-from src.database.data import Data
+from database.church import Church
+from database.nasPunkt import NasPunkt
+from database.uezd import Uezd
+from database.data import Data
 
 
 # Грузим таблицы в базу

@@ -5,7 +5,7 @@ services:
     image: postgres
     restart: unless-stopped
     volumes:
-      - /Users/mac/psql/data:/var/lib/postgresql/data
+      - /Users/macbookair/PycharmProjects/metric-books-site/psql:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: "metric"
       POSTGRES_USER: "admin"

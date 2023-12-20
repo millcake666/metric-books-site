@@ -1,20 +1,15 @@
-from typing import Sequence, Dict
-
-from sqlalchemy import select, desc
-
+from typing import List
+from sqlalchemy import select
 from database.uezd import Uezd
-from database.nasPunkt import NasPunkt
-from database.church import Church
-from database.data import Data
-from scheme.uezd import UezdDict
+from scheme.uezd import Uezd as UezdJSON, NasPunkt as NPJSON, Church as CRJSON
 
 from service.service import DefaultService
 
 
 class UezdSectionService(DefaultService):
-    def get(self) -> dict:
-        ud = UezdDict
-        ud.model_dump_json(self.session.scalars(select(NasPunkt)).all())
-        res = UezdDict()
-
-        return res
+    def get(self):
+        data: List[Uezd] = self.session.scalars(select(Uezd)).all()
+        return [
+            UezdJSON.model_validate(item)
+            for item in data
+        ]

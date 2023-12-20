@@ -8,4 +8,4 @@ class Uezd(Base):
 
     u_code = Column(Integer(), primary_key=True)
     u_name = Column(Text(), nullable=False)
-    # nas_punkt = relationship("NasPunkt")
+    nas_punkt = relationship("NasPunkt")
