@@ -11,7 +11,7 @@ from scheme.uezd import UezdDict
 from service.service import DefaultService
 
 
-class UezdSectionService(DefaultService):
+class DataService(DefaultService):
     def get(self) -> dict:
         ud = UezdDict
         ud.model_dump_json(self.session.scalars(select(NasPunkt)).all())
