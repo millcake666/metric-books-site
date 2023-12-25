@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 
 class Church(BaseModel):
+    c_code: int
     c_name: str
 
     class Config:
@@ -11,6 +12,7 @@ class Church(BaseModel):
 
 
 class NasPunkt(BaseModel):
+    np_code: int
     np_name: str
     church: List[Church]
 
@@ -19,6 +21,7 @@ class NasPunkt(BaseModel):
 
 
 class Uezd(BaseModel):
+    u_code: int
     u_name: str
     nas_punkt: List[NasPunkt]
 

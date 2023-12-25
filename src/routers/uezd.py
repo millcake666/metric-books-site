@@ -15,6 +15,14 @@ router = APIRouter(
 
 @router.get('')
 async def get(db: Session = Depends(get_session)) -> List[Uezd]:
-    # return dict uezd(nasPunkt(Church))......
-    # тут возвращают serviceUezdDict обертку, которую надо описать в service/serviceUezdDict.py, которая делает запросы к базе и возвращает словарь из уездов нас пунктов церквей
     return UezdSectionService(db).get()
+
+
+@router.get('/{u_code}')
+async def get_uezd(u_code: int, db: Session = Depends(get_session)) -> Uezd:
+    return UezdSectionService(db).get_by_code(u_code)
+
+
+@router.delete('/{u_code}')
+async def delete(u_code: int, db: Session = Depends(get_session)):
+    UezdSectionService(db).delete(u_code)

@@ -7,7 +7,7 @@ class Data(Base):
     __tablename__ = 'Data'
 
     met_code = Column(Integer(), primary_key=True)
-    c_code = Column(Integer(), ForeignKey('Church.c_code'))
+    c_code = Column(Integer(), ForeignKey('Church.c_code', ondelete='CASCADE'))
     met_year = Column(Text(), nullable=False)
     met_fond = Column(Text(), nullable=False)
     met_delo = Column(Text(), nullable=False)
