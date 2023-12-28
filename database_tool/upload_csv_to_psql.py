@@ -6,7 +6,6 @@ from database.nasPunkt import NasPunkt
 from database.uezd import Uezd
 from database.data import Data
 
-
 # Грузим таблицы в базу
 Base.metadata.create_all(engine)
 # Base.metadata.drop_all(engine)
@@ -25,7 +24,7 @@ with open(os.path.join(csv_save_path, 'Uezd.csv'), 'r+', encoding='utf-8') as fi
 
     for row in rows:
         u = Uezd(
-            u_code=row[0],
+            # u_code=row[0],
             u_name=row[1]
         )
         session.add(u)
@@ -41,7 +40,7 @@ with open(os.path.join(csv_save_path, 'NasPunkt.csv'), 'r+', encoding='utf-8') a
     for row in rows:
         u = NasPunkt(
             u_code=row[0],
-            np_code=row[1],
+            # np_code=row[1],
             np_name=row[2]
         )
         session.add(u)
@@ -57,7 +56,7 @@ with open(os.path.join(csv_save_path, 'Church.csv'), 'r+', encoding='utf-8') as 
     for row in rows:
         u = Church(
             np_code=row[0],
-            c_code=row[1],
+            # c_code=row[1],
             c_name=row[2]
         )
         session.add(u)
@@ -72,7 +71,7 @@ with open(os.path.join(csv_save_path, 'Data.csv'), 'r+', encoding='utf-8') as fi
 
     for row in rows:
         u = Data(
-            met_code=row[0],
+            # met_code=row[0],
             c_code=row[1],
             met_year=row[2],
             met_fond=row[3],

@@ -9,6 +9,6 @@ class NasPunkt(Base):
 
     u_code = Column(Integer(), ForeignKey('Uezd.u_code', ondelete='CASCADE'))
     uezd = relationship('Uezd',)
-    np_code = Column(Integer(), primary_key=True)
+    np_code = Column(Integer(), primary_key=True, autoincrement=True)
     np_name = Column(Text(), nullable=False)
     church = relationship(Church)

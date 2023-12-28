@@ -1,5 +1,5 @@
 from typing import List
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, update, insert
 from database.uezd import Uezd
 from scheme.uezd import Uezd as UezdJSON
 
@@ -20,4 +20,13 @@ class UezdSectionService(DefaultService):
 
     def delete(self, u_code: int):
         self.session.execute(delete(Uezd).where(Uezd.u_code == u_code))
+        self.session.commit()
+
+    def patch(self, u_code: int, u_name: str):
+        self.session.execute(
+            update(Uezd).where(Uezd.u_code == u_code).values(u_name=u_name))
+        self.session.commit()
+
+    def add(self, u_name: str):
+        self.session.execute(insert(Uezd).values(u_name=u_name))
         self.session.commit()
