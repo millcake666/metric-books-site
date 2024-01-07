@@ -24,7 +24,7 @@ with open(os.path.join(csv_save_path, 'Uezd.csv'), 'r+', encoding='utf-8') as fi
 
     for row in rows:
         u = Uezd(
-            u_code=row[0],
+            # u_code=row[0],
             u_name=row[1]
         )
         session.add(u)
