@@ -23,10 +23,13 @@ class UezdSectionService(DefaultService):
         self.session.commit()
 
     def patch(self, u_code: int, u_name: str):
-        self.session.execute(
-            update(Uezd).where(Uezd.u_code == u_code).values(u_name=u_name))
+        self.session.execute(update(Uezd).where(Uezd.u_code == u_code).values(u_name=u_name))
         self.session.commit()
 
     def add(self, u_name: str):
-        self.session.execute(insert(Uezd).values(u_name=u_name))
+        insert_stmt = insert(Uezd).values(u_name=u_name).returning(Uezd.u_code)
+        result = self.session.execute(insert_stmt)
         self.session.commit()
+
+        last_inserted_id = result.scalar()
+        return last_inserted_id

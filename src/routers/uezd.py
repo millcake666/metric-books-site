@@ -25,7 +25,7 @@ async def get_uezd(u_code: int, db: Session = Depends(get_session)) -> Uezd:
 
 @router.delete('/{u_code}')
 async def delete(u_code: int, db: Session = Depends(get_session)):
-    UezdSectionService(db).delete(u_code)
+    return UezdSectionService(db).delete(u_code)
 
 
 @router.patch('/{u_code}/{u_name}')
